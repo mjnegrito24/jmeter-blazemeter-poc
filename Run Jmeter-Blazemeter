@@ -1,0 +1,6 @@
+      - name: Start BlazeMeter Test
+        env:
+          BLAZEMETER_API_KEY: ${{ secrets.BLAZEMETER_API_KEY }}
+          BLAZEMETER_TEST_ID: ${{ env.BLAZEMETER_TEST_ID }}
+        run: |
+          curl -X POST -H "Content-Type: application/json" -H "Authorization: Bearer $BLAZEMETER_API_KEY" -d '{"projectId": "$BLAZEMETER_TEST_ID"}' https://a.blazemeter.com/api/v4/tests/${{ env.BLAZEMETER_TEST_ID }}/start
