@@ -1,0 +1,34 @@
+name: BlazeMeter Integration
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  run-blazemeter-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Start BlazeMeter Test
+        run: |
+          curl -X POST \
+            -H "Content-Type: application/json" \
+            -H "Authorization: Api-Key ${{ secrets.BLAZEMETER_API_KEY }}" \
+            -d '{"test_id": "YOUR_TEST_ID"}' \
+            "https://a.blazemeter.com/api/v4/tests/YOUR_TEST_ID/start"
+
+      - name: Monitor Test Status
+        run: |
+          curl -X GET \
+            -H "Authorization: Api-Key ${{ secrets.BLAZEMETER_API_KEY }}" \
+            "https://a.blazemeter.com/api/v4/tests/YOUR_TEST_ID/status"
+
+      - name: Get Test Results
+        run: |
+          curl -X GET \
+            -H "Authorization: Api-Key ${{ secrets.BLAZEMETER_API_KEY }}" \
+            "https://a.blazemeter.com/api/v4/tests/YOUR_TEST_ID/reports/report-url"
