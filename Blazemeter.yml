@@ -1,0 +1,13 @@
+name: BlazeMeter JMeter Tests
+
+on:
+  push:
+    branches:
+      - main  # Trigger workflow on push to main branch
+  pull_request:
+    branches:
+      - main  # Trigger workflow on pull request to main branch
+
+env:
+  BLAZEMETER_API_KEY: $e3f4dad0b7fe564e373a96bc98fea4ade1b95f77d727f7652d6a533b7c4e6a7c8d063fea
+  BLAZEMETER_TEST_ID: af69ba7b39eb60cfc8f3bcab
