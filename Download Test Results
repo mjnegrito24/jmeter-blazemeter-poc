@@ -1,0 +1,6 @@
+      - name: Download Test Results
+        env:
+          BLAZEMETER_API_KEY: ${{ secrets.BLAZEMETER_API_KEY }}
+          BLAZEMETER_TEST_ID: ${{ env.BLAZEMETER_TEST_ID }}
+        run: |
+          curl -o results.csv -H "Authorization: Bearer $BLAZEMETER_API_KEY" https://a.blazemeter.com/api/v4/tests/${{ env.BLAZEMETER_TEST_ID }}/reports/main/files/csv
